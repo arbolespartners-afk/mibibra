@@ -67,10 +67,14 @@ export default function ChatPage() {
 
       if (!b) { router.push("/dashboard/bookings"); return }
 
-      const { data: djProfile } = await supabase.from("profiles").select("name").eq("id", b.dj_id).single()
-      const { data: orgProfile } = await supabase.from("profiles").select("name").eq("id", b.events.organizer_id).single()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const events = (Array.isArray(b.events) ? b.events[0] : b.events) as any
 
-      setBooking({ ...b, dj_name: djProfile?.name ?? "DJ", organizer_name: orgProfile?.name ?? "Organizador" })
+      const { data: djProfile } = await supabase.from("profiles").select("name").eq("id", b.dj_id).single()
+      const { data: orgProfile } = await supabase.from("profiles").select("name").eq("id", events.organizer_id).single()
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setBooking({ ...(b as any), events, dj_name: djProfile?.name ?? "DJ", organizer_name: orgProfile?.name ?? "Organizador" })
 
       const { data: msgs } = await supabase
         .from("messages")
