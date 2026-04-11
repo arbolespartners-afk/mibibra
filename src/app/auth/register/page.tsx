@@ -1,13 +1,21 @@
 'use client'
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 
 type Role = "dj" | "organizer" | null
 
 export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterForm />
+    </Suspense>
+  )
+}
+
+function RegisterForm() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const initialRole = searchParams.get("role") as Role
