@@ -173,6 +173,7 @@ export default function DashboardPage() {
                 <NavRow icon={<Plus className="size-5" />} iconBg="#D62828" label="Publicar evento" desc="Crea un evento y encuentra DJ" href="/dashboard/events/new" />
                 <NavRow icon={<CalendarDays className="size-5" />} iconBg="#003049" label="Mis eventos" desc="Gestiona lo que has publicado" href="/dashboard/events" badge={stats.upcomingEvents > 0 ? `${stats.upcomingEvents}` : undefined} />
                 <NavRow icon={<MessageCircle className="size-5" />} iconBg="#F77F00" label="Bookings y chats" desc="Solicitudes de DJs y conversaciones" href="/dashboard/bookings" badge={stats.pendingBookings > 0 ? `${stats.pendingBookings} nuevas` : undefined} badgeColor="#D62828" />
+                <NavRow icon={<Star className="size-5" />} iconBg="#D62828" label="Buscar DJs" desc="Explora perfiles y contacta directamente" href="/dashboard/djs" />
               </>
             )}
           </div>
