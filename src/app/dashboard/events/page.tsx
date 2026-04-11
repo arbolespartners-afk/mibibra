@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
-import { ArrowLeft, MapPin, Calendar, Euro, Clock, Plus } from "lucide-react"
+import { ArrowLeft, MapPin, Calendar, Euro, Clock, Plus, MessageCircle } from "lucide-react"
 
 type Event = {
   id: string
@@ -47,15 +47,25 @@ export default function EventsPage() {
   const router = useRouter()
   const [events, setEvents] = useState<Event[]>([])
   const [role, setRole] = useState<"dj" | "organizer" | null>(null)
+  const [userId, setUserId] = useState<string | null>(null)
+  const [requesting, setRequesting] = useState<string | null>(null)
+  const [requested, setRequested] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function load() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) { router.push("/auth/login"); return }
+      setUserId(user.id)
 
       const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single()
       setRole(profile?.role ?? null)
+
+      // Cargar bookings ya solicitados por este DJ
+      if (profile?.role === "dj") {
+        const { data: myBookings } = await supabase.from("bookings").select("event_id").eq("dj_id", user.id)
+        setRequested(new Set(myBookings?.map(b => b.event_id) ?? []))
+      }
 
       let query = supabase
         .from("events")
@@ -184,9 +194,39 @@ export default function EventsPage() {
                   )}
 
                   {role === "dj" && (
-                    <button className="w-full py-2.5 bg-[#D62828] hover:bg-[#b82020] text-white rounded-full font-semibold text-sm transition-colors mt-1">
-                      Solicitar este bolo →
-                    </button>
+                    requested.has(event.id) ? (
+                      <Link
+                        href="/dashboard/bookings"
+                        className="w-full py-2.5 bg-[#003049] text-white rounded-full font-semibold text-sm transition-colors mt-1 flex items-center justify-center gap-2"
+                      >
+                        <MessageCircle className="size-4" /> Ver chat →
+                      </Link>
+                    ) : (
+                      <button
+                        disabled={requesting === event.id}
+                        onClick={async () => {
+                          if (!userId) return
+                          setRequesting(event.id)
+                          const { data } = await supabase.from("bookings").insert({
+                            dj_id: userId,
+                            event_id: event.id,
+                            status: "pending",
+                          }).select("id").single()
+                          if (data) {
+                            await supabase.from("messages").insert({
+                              booking_id: data.id,
+                              sender_id: userId,
+                              content: "¡Hola! Me interesa este evento. ¿Podemos hablar?",
+                            })
+                            setRequested(prev => new Set([...prev, event.id]))
+                          }
+                          setRequesting(null)
+                        }}
+                        className="w-full py-2.5 bg-[#D62828] hover:bg-[#b82020] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors mt-1"
+                      >
+                        {requesting === event.id ? "Enviando..." : "Solicitar este bolo →"}
+                      </button>
+                    )
                   )}
                 </div>
               </div>
