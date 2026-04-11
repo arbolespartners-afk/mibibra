@@ -67,7 +67,8 @@ export default function BookingsPage() {
         .eq(isDJ ? "dj_id" : "events.organizer_id", user.id)
         .order("created_at", { ascending: false })
 
-      setBookings(data ?? [])
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setBookings((data ?? []) as any)
       setLoading(false)
     }
     load()
