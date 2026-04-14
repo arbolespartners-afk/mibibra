@@ -7,16 +7,16 @@ import { supabase } from "@/lib/supabase"
 import { ArrowLeft, Save, Eye, Pencil, MapPin, Globe, Share2 } from "lucide-react"
 
 const EVENT_TYPES = [
-  { name: "Boda", color: "#FCBF49", textColor: "#003049" },
+  { name: "Boda", color: "#ffd60a", textColor: "#003049" },
   { name: "Discoteca", color: "#003049", textColor: "white" },
-  { name: "Evento corporativo", color: "#0a4f7a", textColor: "white" },
-  { name: "Festival", color: "#D62828", textColor: "white" },
+  { name: "Evento corporativo", color: "#007aff", textColor: "white" },
+  { name: "Festival", color: "#ff2d55", textColor: "white" },
   { name: "Cumpleaños", color: "#F77F00", textColor: "white" },
-  { name: "Fiesta privada", color: "#FCBF49", textColor: "#003049" },
+  { name: "Fiesta privada", color: "#ffd60a", textColor: "#003049" },
   { name: "Bar / Restaurante", color: "#003049", textColor: "white" },
-  { name: "Hotel", color: "#0a4f7a", textColor: "white" },
+  { name: "Hotel", color: "#007aff", textColor: "white" },
   { name: "Terraza", color: "#F77F00", textColor: "white" },
-  { name: "Afterwork", color: "#D62828", textColor: "white" },
+  { name: "Afterwork", color: "#ff2d55", textColor: "white" },
 ]
 
 type OrgProfile = {
@@ -107,16 +107,16 @@ export default function OrganizerProfilePage() {
   const labelClass = "text-sm font-medium text-[#003049]"
 
   return (
-    <main className="flex flex-col min-h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col min-h-screen bg-[#faf8f4]">
       <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-white">
-        <span className="text-2xl font-bold tracking-tight text-[#003049]">mibibra</span>
+        <span className="text-2xl font-bold tracking-tight text-[#1a1a2e]">mi<span className="text-[#ff2d55]">bibra</span></span>
         <Link href="/dashboard" className="flex items-center gap-1.5 text-sm text-[#003049]/50 hover:text-[#003049] transition-colors font-medium">
           <ArrowLeft className="size-4" /> Dashboard
         </Link>
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#F77F00] via-[#FCBF49] to-[#F77F00] px-6 py-10">
+      <div className="bg-gradient-to-r from-[#F77F00] via-[#ffd60a] to-[#F77F00] px-6 py-10">
         <div className="max-w-2xl mx-auto flex items-center gap-6">
           <div className="w-20 h-20 rounded-2xl bg-white/30 flex items-center justify-center text-[#003049] text-2xl font-bold shrink-0 border-2 border-white/50">
             {getInitials(profile.name)}
@@ -229,7 +229,7 @@ export default function OrganizerProfilePage() {
           <div className="flex flex-col gap-4">
             <p className="text-sm text-[#003049]/50 text-center">Así verán tu perfil los DJs</p>
             <div className="bg-white rounded-2xl border-2 border-zinc-100 overflow-hidden shadow-sm">
-              <div className="bg-gradient-to-r from-[#F77F00] to-[#FCBF49] p-6 flex items-center gap-4">
+              <div className="bg-gradient-to-r from-[#F77F00] to-[#ffd60a] p-6 flex items-center gap-4">
                 <div className="w-16 h-16 rounded-xl bg-white/30 flex items-center justify-center text-[#003049] text-xl font-bold border-2 border-white/50">
                   {getInitials(profile.name)}
                 </div>

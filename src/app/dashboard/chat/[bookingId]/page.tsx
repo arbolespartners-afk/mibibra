@@ -48,6 +48,7 @@ export default function ChatPage() {
   const [role, setRole] = useState<"dj" | "organizer" | null>(null)
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
+  const [agreedPrice, setAgreedPrice] = useState("")
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -122,11 +123,15 @@ export default function ChatPage() {
   }
 
   async function updateStatus(status: "accepted" | "rejected") {
-    await supabase.from("bookings").update({ status }).eq("id", bookingId)
-    setBooking(prev => prev ? { ...prev, status } : prev)
+    const price = status === "accepted" && agreedPrice ? Number(agreedPrice) : null
+    await supabase.from("bookings").update({
+      status,
+      ...(price ? { agreed_price: price } : {}),
+    }).eq("id", bookingId)
+    setBooking(prev => prev ? { ...prev, status, agreed_price: price ?? prev.agreed_price } : prev)
 
     const msg = status === "accepted"
-      ? "✅ He aceptado la solicitud. ¡Nos vemos en el evento!"
+      ? `✅ He aceptado la solicitud.${price ? ` Precio acordado: ${price}€.` : ""} ¡Nos vemos en el evento!`
       : "❌ He rechazado la solicitud. Gracias por tu interés."
     await supabase.from("messages").insert({ booking_id: bookingId, sender_id: userId!, content: msg })
   }
@@ -140,17 +145,17 @@ export default function ChatPage() {
   const otherName = isOrganizer ? booking.dj_name : booking.organizer_name
 
   const STATUS_COLOR: Record<string, string> = {
-    pending: "#F77F00", accepted: "#22c55e", rejected: "#D62828", completed: "#003049"
+    pending: "#F77F00", accepted: "#22c55e", rejected: "#ff2d55", completed: "#007aff"
   }
   const STATUS_LABEL: Record<string, string> = {
     pending: "Pendiente", accepted: "Confirmado", rejected: "Rechazado", completed: "Completado"
   }
 
   return (
-    <main className="flex flex-col h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col h-screen bg-[#faf8f4]">
       {/* Navbar */}
       <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-white shrink-0">
-        <span className="text-2xl font-bold tracking-tight text-[#003049]">mibibra</span>
+        <span className="text-2xl font-bold tracking-tight text-[#1a1a2e]">mi<span className="text-[#ff2d55]">bibra</span></span>
         <Link href="/dashboard/bookings" className="flex items-center gap-1.5 text-sm text-[#003049]/50 hover:text-[#003049] transition-colors font-medium">
           <ArrowLeft className="size-4" /> Bookings
         </Link>
@@ -175,19 +180,31 @@ export default function ChatPage() {
 
         {/* Botones aceptar/rechazar (solo organizador, solo si pending) */}
         {isOrganizer && isPending && (
-          <div className="max-w-2xl mx-auto flex gap-3 mt-3">
-            <button
-              onClick={() => updateStatus("accepted")}
-              className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full font-semibold text-sm transition-colors"
-            >
-              <Check className="size-4" /> Aceptar DJ
-            </button>
-            <button
-              onClick={() => updateStatus("rejected")}
-              className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#D62828] hover:bg-[#b82020] text-white rounded-full font-semibold text-sm transition-colors"
-            >
-              <X className="size-4" /> Rechazar
-            </button>
+          <div className="max-w-2xl mx-auto flex flex-col gap-2 mt-3">
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                value={agreedPrice}
+                onChange={e => setAgreedPrice(e.target.value)}
+                placeholder="Precio acordado (€) — opcional"
+                className="flex-1 px-3 py-2 bg-zinc-50 border-2 border-zinc-100 rounded-full text-sm text-[#003049] placeholder:text-[#003049]/30 focus:outline-none focus:border-[#22c55e] transition-colors"
+                min={0}
+              />
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => updateStatus("accepted")}
+                className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full font-semibold text-sm transition-colors"
+              >
+                <Check className="size-4" /> Aceptar DJ
+              </button>
+              <button
+                onClick={() => updateStatus("rejected")}
+                className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#ff2d55] hover:bg-[#e0002d] text-white rounded-full font-semibold text-sm transition-colors"
+              >
+                <X className="size-4" /> Rechazar
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -207,7 +224,7 @@ export default function ChatPage() {
                 <div
                   className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                     isMe
-                      ? "bg-[#003049] text-white rounded-br-sm"
+                      ? "bg-[#0d0d18] text-white rounded-br-sm"
                       : "bg-white border-2 border-zinc-100 text-[#003049] rounded-bl-sm"
                   }`}
                 >
@@ -235,7 +252,7 @@ export default function ChatPage() {
           <button
             type="submit"
             disabled={!input.trim() || sending}
-            className="w-11 h-11 bg-[#D62828] hover:bg-[#b82020] disabled:opacity-40 text-white rounded-full flex items-center justify-center transition-colors shrink-0"
+            className="w-11 h-11 bg-[#ff2d55] hover:bg-[#e0002d] disabled:opacity-40 text-white rounded-full flex items-center justify-center transition-colors shrink-0"
           >
             <Send className="size-4" />
           </button>

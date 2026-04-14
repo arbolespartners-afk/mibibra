@@ -25,19 +25,19 @@ const GENRE_COLORS: Record<string, { bg: string; text: string }> = {
   "House": { bg: "#003049", text: "white" },
   "Techno": { bg: "#1a1a2e", text: "white" },
   "Tech House": { bg: "#003049", text: "white" },
-  "Deep House": { bg: "#0a4f7a", text: "white" },
+  "Deep House": { bg: "#007aff", text: "white" },
   "Electrónica": { bg: "#003049", text: "white" },
   "Drum & Bass": { bg: "#1a1a2e", text: "white" },
-  "Trance": { bg: "#0a4f7a", text: "white" },
+  "Trance": { bg: "#007aff", text: "white" },
   "Ambient": { bg: "#003049", text: "white" },
   "Reggaeton": { bg: "#F77F00", text: "white" },
-  "Hip Hop": { bg: "#D62828", text: "white" },
-  "R&B": { bg: "#D62828", text: "white" },
+  "Hip Hop": { bg: "#ff2d55", text: "white" },
+  "R&B": { bg: "#ff2d55", text: "white" },
   "Trap": { bg: "#F77F00", text: "white" },
-  "Comercial": { bg: "#FCBF49", text: "#003049" },
+  "Comercial": { bg: "#ffd60a", text: "#003049" },
   "Latino": { bg: "#F77F00", text: "white" },
-  "Flamenco": { bg: "#D62828", text: "white" },
-  "Jazz": { bg: "#FCBF49", text: "#003049" },
+  "Flamenco": { bg: "#ff2d55", text: "white" },
+  "Jazz": { bg: "#ffd60a", text: "#003049" },
 }
 
 const ALL_GENRES = Object.keys(GENRE_COLORS)
@@ -47,11 +47,11 @@ function getInitials(name: string) {
 }
 
 const AVATAR_GRADIENTS = [
-  "from-[#003049] to-[#D62828]",
-  "from-[#D62828] to-[#F77F00]",
-  "from-[#F77F00] to-[#FCBF49]",
+  "from-[#0d0d18] to-[#ff2d55]",
+  "from-[#ff2d55] to-[#F77F00]",
+  "from-[#F77F00] to-[#ffd60a]",
   "from-[#003049] to-[#F77F00]",
-  "from-[#D62828] to-[#003049]",
+  "from-[#ff2d55] to-[#003049]",
 ]
 
 export default function DJsPage() {
@@ -141,16 +141,16 @@ export default function DJsPage() {
   }
 
   return (
-    <main className="flex flex-col min-h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col min-h-screen bg-[#faf8f4]">
       <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-white">
-        <span className="text-2xl font-bold tracking-tight text-[#003049]">mibibra</span>
+        <span className="text-2xl font-bold tracking-tight text-[#1a1a2e]">mi<span className="text-[#ff2d55]">bibra</span></span>
         <Link href="/dashboard" className="flex items-center gap-1.5 text-sm text-[#003049]/50 hover:text-[#003049] transition-colors font-medium">
           <ArrowLeft className="size-4" /> Dashboard
         </Link>
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#003049] to-[#D62828] px-6 py-10">
+      <div className="bg-gradient-to-r from-[#0d0d18] to-[#ff2d55] px-6 py-10">
         <div className="max-w-3xl mx-auto flex flex-col gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white">Buscar DJs</h1>
@@ -164,14 +164,14 @@ export default function DJsPage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Busca por nombre o ciudad..."
-                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl text-sm text-[#003049] placeholder:text-[#003049]/30 focus:outline-none focus:ring-2 focus:ring-[#FCBF49]"
+                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl text-sm text-[#003049] placeholder:text-[#003049]/30 focus:outline-none focus:ring-2 focus:ring-[#ffd60a]"
               />
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                 showFilters || selectedGenres.length > 0 || maxPrice
-                  ? "bg-[#FCBF49] text-[#003049]"
+                  ? "bg-[#ffd60a] text-[#003049]"
                   : "bg-white/20 text-white hover:bg-white/30"
               }`}
             >
@@ -189,7 +189,7 @@ export default function DJsPage() {
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-[#003049]">Filtrar por género</p>
               {hasFilters && (
-                <button onClick={clearFilters} className="flex items-center gap-1 text-xs text-[#D62828] font-medium hover:opacity-70">
+                <button onClick={clearFilters} className="flex items-center gap-1 text-xs text-[#ff2d55] font-medium hover:opacity-70">
                   <X className="size-3" /> Limpiar filtros
                 </button>
               )}
@@ -233,7 +233,7 @@ export default function DJsPage() {
             <div className="text-5xl">🎧</div>
             <h2 className="text-lg font-semibold text-[#003049]">No hay DJs con esos filtros</h2>
             <p className="text-[#003049]/50 text-sm">Prueba con otros géneros o ciudad</p>
-            <button onClick={clearFilters} className="px-5 py-2.5 bg-[#D62828] text-white rounded-full font-semibold text-sm hover:bg-[#b82020] transition-colors">
+            <button onClick={clearFilters} className="px-5 py-2.5 bg-[#ff2d55] text-white rounded-full font-semibold text-sm hover:bg-[#e0002d] transition-colors">
               Quitar filtros
             </button>
           </div>
@@ -254,7 +254,7 @@ export default function DJsPage() {
                         <h3 className="font-bold text-[#003049] text-base">{dj.name}</h3>
                         {dj.rating > 0 && (
                           <div className="flex items-center gap-1 shrink-0">
-                            <Star className="size-3.5 fill-[#FCBF49] text-[#FCBF49]" />
+                            <Star className="size-3.5 fill-[#ffd60a] text-[#ffd60a]" />
                             <span className="text-sm font-semibold text-[#003049]">{dj.rating.toFixed(1)}</span>
                           </div>
                         )}
@@ -323,7 +323,7 @@ export default function DJsPage() {
                     )}
                     <Link
                       href={`/dashboard/events/new?dj=${dj.id}`}
-                      className="ml-auto flex items-center gap-2 px-4 py-2 bg-[#D62828] hover:bg-[#b82020] text-white rounded-full text-xs font-semibold transition-colors"
+                      className="ml-auto flex items-center gap-2 px-4 py-2 bg-[#ff2d55] hover:bg-[#e0002d] text-white rounded-full text-xs font-semibold transition-colors"
                     >
                       <Music className="size-3.5" /> Contactar DJ
                     </Link>

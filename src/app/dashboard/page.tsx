@@ -63,8 +63,8 @@ export default function DashboardPage() {
     return (
       <main className="flex min-h-screen items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 rounded-full border-2 border-[#D62828] border-t-transparent animate-spin" />
-          <p className="text-[#003049]/40 text-sm">Cargando...</p>
+          <div className="w-8 h-8 rounded-full border-2 border-[#ff2d55] border-t-transparent animate-spin" />
+          <p className="text-[#1a1a2e]/40 text-sm">Cargando...</p>
         </div>
       </main>
     )
@@ -73,13 +73,13 @@ export default function DashboardPage() {
   const isDJ = profile?.role === "dj"
 
   return (
-    <main className="flex flex-col min-h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col min-h-screen bg-[#faf8f4]">
       {/* Header */}
-      <div className={`bg-gradient-to-br ${isDJ ? "from-[#003049] via-[#D62828] to-[#F77F00]" : "from-[#F77F00] via-[#FCBF49] to-[#F77F00]"} px-6 pt-6 pb-20`}>
+      <div className={`bg-gradient-to-br ${isDJ ? "from-[#0d0d18] via-[#ff2d55] to-[#F77F00]" : "from-[#F77F00] via-[#ffd60a] to-[#F77F00]"} px-6 pt-6 pb-20`}>
         <div className="max-w-3xl mx-auto">
           {/* Topbar */}
           <div className="flex items-center justify-between mb-10">
-            <span className="text-2xl font-bold text-white">mibibra</span>
+            <span className="text-2xl font-bold text-white">mi<span className="text-[#ff2d55]">bibra</span></span>
             <button onClick={handleLogout} className="flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors">
               <LogOut className="size-4" /> Salir
             </button>
@@ -87,18 +87,18 @@ export default function DashboardPage() {
 
           {/* Perfil */}
           <div className="flex items-center gap-5">
-            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold border-2 border-white/30 shrink-0 ${isDJ ? "bg-white/20 text-white" : "bg-white/40 text-[#003049]"}`}>
+            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold border-2 border-white/30 shrink-0 ${isDJ ? "bg-white/20 text-white" : "bg-white/40 text-[#1a1a2e]"}`}>
               {getInitials(profile?.name ?? "")}
             </div>
             <div className="flex flex-col gap-1">
-              <p className={`text-sm font-medium ${isDJ ? "text-white/70" : "text-[#003049]/70"}`}>
+              <p className={`text-sm font-medium ${isDJ ? "text-white/70" : "text-[#1a1a2e]/70"}`}>
                 {isDJ ? "Panel de DJ" : "Panel de organizador"}
               </p>
-              <h1 className={`text-2xl font-bold ${isDJ ? "text-white" : "text-[#003049]"}`}>
+              <h1 className={`text-2xl font-bold ${isDJ ? "text-white" : "text-[#1a1a2e]"}`}>
                 Hola, {profile?.name?.split(" ")[0]} 👋
               </h1>
               {profile?.city && (
-                <p className={`text-sm flex items-center gap-1 ${isDJ ? "text-white/60" : "text-[#003049]/60"}`}>
+                <p className={`text-sm flex items-center gap-1 ${isDJ ? "text-white/60" : "text-[#1a1a2e]/60"}`}>
                   <MapPin className="size-3.5" /> {profile.city}
                 </p>
               )}
@@ -113,7 +113,7 @@ export default function DashboardPage() {
           <StatCard
             value={stats.pendingBookings}
             label={isDJ ? "Solicitudes" : "Peticiones"}
-            color="#D62828"
+            color="#ff2d55"
             highlight={stats.pendingBookings > 0}
           />
           <StatCard
@@ -124,7 +124,7 @@ export default function DashboardPage() {
           <StatCard
             value={stats.totalBookings}
             label={isDJ ? "Total bolos" : "Confirmados"}
-            color="#003049"
+            color="#007aff"
           />
         </div>
       </div>
@@ -133,7 +133,7 @@ export default function DashboardPage() {
 
         {/* Acción principal */}
         {isDJ ? (
-          <Link href="/dashboard/events" className="flex items-center justify-between p-5 bg-gradient-to-r from-[#D62828] to-[#F77F00] rounded-2xl shadow-lg shadow-[#D62828]/20 hover:opacity-95 transition-opacity">
+          <Link href="/dashboard/events" className="flex items-center justify-between p-5 bg-gradient-to-r from-[#ff2d55] to-[#F77F00] rounded-2xl shadow-lg shadow-[#ff2d55]/20 hover:opacity-95 transition-opacity">
             <div className="flex flex-col gap-1">
               <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Acción rápida</p>
               <p className="text-white font-bold text-lg">Ver eventos disponibles</p>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
             </div>
           </Link>
         ) : (
-          <Link href="/dashboard/events/new" className="flex items-center justify-between p-5 bg-gradient-to-r from-[#D62828] to-[#F77F00] rounded-2xl shadow-lg shadow-[#D62828]/20 hover:opacity-95 transition-opacity">
+          <Link href="/dashboard/events/new" className="flex items-center justify-between p-5 bg-gradient-to-r from-[#ff2d55] to-[#F77F00] rounded-2xl shadow-lg shadow-[#ff2d55]/20 hover:opacity-95 transition-opacity">
             <div className="flex flex-col gap-1">
               <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Acción rápida</p>
               <p className="text-white font-bold text-lg">Publicar nuevo evento</p>
@@ -158,31 +158,31 @@ export default function DashboardPage() {
 
         {/* Navegación */}
         <div className="flex flex-col gap-2">
-          <p className="text-xs font-semibold text-[#003049]/40 uppercase tracking-wider px-1">Mi espacio</p>
+          <p className="text-xs font-semibold text-[#1a1a2e]/40 uppercase tracking-wider px-1">Mi espacio</p>
           <div className="bg-white rounded-2xl border-2 border-zinc-100 overflow-hidden divide-y divide-zinc-100">
             {isDJ ? (
               <>
-                <NavRow icon={<User className="size-5" />} iconBg="#D62828" label="Mi perfil" desc="Bio, géneros, sets y tarifa" href="/dashboard/profile" />
+                <NavRow icon={<User className="size-5" />} iconBg="#ff2d55" label="Mi perfil" desc="Bio, géneros, sets y tarifa" href="/dashboard/profile" />
                 <NavRow icon={<CalendarDays className="size-5" />} iconBg="#F77F00" label="Eventos disponibles" desc="Encuentra tu próximo bolo" href="/dashboard/events" badge={stats.upcomingEvents > 0 ? `${stats.upcomingEvents} abiertos` : undefined} />
-                <NavRow icon={<MessageCircle className="size-5" />} iconBg="#003049" label="Mis bookings y chats" desc="Solicitudes y conversaciones" href="/dashboard/bookings" badge={stats.pendingBookings > 0 ? `${stats.pendingBookings} nuevas` : undefined} badgeColor="#D62828" />
-                <NavRow icon={<Star className="size-5" />} iconBg="#FCBF49" label="Mis valoraciones" desc="Lo que dicen de ti" href="/dashboard/reviews" disabled />
+                <NavRow icon={<MessageCircle className="size-5" />} iconBg="#007aff" label="Mis bookings y chats" desc="Solicitudes y conversaciones" href="/dashboard/bookings" badge={stats.pendingBookings > 0 ? `${stats.pendingBookings} nuevas` : undefined} badgeColor="#ff2d55" />
+                <NavRow icon={<Star className="size-5" />} iconBg="#ffd60a" label="Mis valoraciones" desc="Lo que dicen de ti" href="/dashboard/reviews" disabled />
               </>
             ) : (
               <>
                 <NavRow icon={<User className="size-5" />} iconBg="#F77F00" label="Mi perfil" desc="Información y tipo de eventos" href="/dashboard/profile/organizer" />
-                <NavRow icon={<Plus className="size-5" />} iconBg="#D62828" label="Publicar evento" desc="Crea un evento y encuentra DJ" href="/dashboard/events/new" />
-                <NavRow icon={<CalendarDays className="size-5" />} iconBg="#003049" label="Mis eventos" desc="Gestiona lo que has publicado" href="/dashboard/events" badge={stats.upcomingEvents > 0 ? `${stats.upcomingEvents}` : undefined} />
-                <NavRow icon={<MessageCircle className="size-5" />} iconBg="#F77F00" label="Bookings y chats" desc="Solicitudes de DJs y conversaciones" href="/dashboard/bookings" badge={stats.pendingBookings > 0 ? `${stats.pendingBookings} nuevas` : undefined} badgeColor="#D62828" />
-                <NavRow icon={<Star className="size-5" />} iconBg="#D62828" label="Buscar DJs" desc="Explora perfiles y contacta directamente" href="/dashboard/djs" />
+                <NavRow icon={<Plus className="size-5" />} iconBg="#ff2d55" label="Publicar evento" desc="Crea un evento y encuentra DJ" href="/dashboard/events/new" />
+                <NavRow icon={<CalendarDays className="size-5" />} iconBg="#007aff" label="Mis eventos" desc="Gestiona lo que has publicado" href="/dashboard/events" badge={stats.upcomingEvents > 0 ? `${stats.upcomingEvents}` : undefined} />
+                <NavRow icon={<MessageCircle className="size-5" />} iconBg="#F77F00" label="Bookings y chats" desc="Solicitudes de DJs y conversaciones" href="/dashboard/bookings" badge={stats.pendingBookings > 0 ? `${stats.pendingBookings} nuevas` : undefined} badgeColor="#ff2d55" />
+                <NavRow icon={<Star className="size-5" />} iconBg="#ff2d55" label="Buscar DJs" desc="Explora perfiles y contacta directamente" href="/dashboard/djs" />
               </>
             )}
           </div>
         </div>
 
         {/* Tip */}
-        <div className="flex items-start gap-3 p-4 bg-[#FCBF49]/10 border-2 border-[#FCBF49]/30 rounded-2xl">
+        <div className="flex items-start gap-3 p-4 bg-[#ffd60a]/10 border-2 border-[#ffd60a]/30 rounded-2xl">
           <span className="text-xl shrink-0">💡</span>
-          <p className="text-sm text-[#003049]/70 leading-relaxed">
+          <p className="text-sm text-[#1a1a2e]/70 leading-relaxed">
             {isDJ
               ? "Completa tu perfil con sets y géneros para que los organizadores te encuentren más fácilmente."
               : "Publica tu evento con cuanta más info mejor — los DJs con mejor match te contactarán antes."}
@@ -195,9 +195,9 @@ export default function DashboardPage() {
 
 function StatCard({ value, label, color, highlight }: { value: number; label: string; color: string; highlight?: boolean }) {
   return (
-    <div className={`flex flex-col items-center gap-1 p-4 bg-white rounded-2xl shadow-sm border-2 transition-all ${highlight ? "border-[#D62828]/30 shadow-[#D62828]/10" : "border-zinc-100"}`}>
+    <div className={`flex flex-col items-center gap-1 p-4 bg-white rounded-2xl shadow-sm border-2 transition-all ${highlight ? "border-[#ff2d55]/30 shadow-[#ff2d55]/10" : "border-zinc-100"}`}>
       <span className="text-2xl font-bold" style={{ color }}>{value}</span>
-      <span className="text-xs text-[#003049]/50 text-center leading-tight font-medium">{label}</span>
+      <span className="text-xs text-[#1a1a2e]/50 text-center leading-tight font-medium">{label}</span>
     </div>
   )
 }
@@ -220,8 +220,8 @@ function NavRow({
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-[#003049] text-sm">{label}</p>
-        <p className="text-xs text-[#003049]/50 mt-0.5">{desc}</p>
+        <p className="font-semibold text-[#1a1a2e] text-sm">{label}</p>
+        <p className="text-xs text-[#1a1a2e]/50 mt-0.5">{desc}</p>
       </div>
       <div className="flex items-center gap-2 shrink-0">
         {badge && (
@@ -232,7 +232,7 @@ function NavRow({
         {disabled ? (
           <span className="text-xs px-2 py-0.5 bg-zinc-100 text-zinc-400 rounded-full font-medium">Pronto</span>
         ) : (
-          <ChevronRight className="size-4 text-[#003049]/30" />
+          <ChevronRight className="size-4 text-[#1a1a2e]/30" />
         )}
       </div>
     </div>

@@ -23,16 +23,16 @@ type Event = {
 }
 
 const TYPE_COLORS: Record<string, { bg: string; text: string }> = {
-  "Boda": { bg: "#FCBF49", text: "#003049" },
+  "Boda": { bg: "#ffd60a", text: "#003049" },
   "Discoteca": { bg: "#003049", text: "white" },
-  "Evento corporativo": { bg: "#0a4f7a", text: "white" },
-  "Festival": { bg: "#D62828", text: "white" },
+  "Evento corporativo": { bg: "#007aff", text: "white" },
+  "Festival": { bg: "#ff2d55", text: "white" },
   "Cumpleaños": { bg: "#F77F00", text: "white" },
-  "Fiesta privada": { bg: "#FCBF49", text: "#003049" },
+  "Fiesta privada": { bg: "#ffd60a", text: "#003049" },
   "Bar / Restaurante": { bg: "#003049", text: "white" },
-  "Hotel": { bg: "#0a4f7a", text: "white" },
+  "Hotel": { bg: "#007aff", text: "white" },
   "Terraza": { bg: "#F77F00", text: "white" },
-  "Afterwork": { bg: "#D62828", text: "white" },
+  "Afterwork": { bg: "#ff2d55", text: "white" },
 }
 
 function formatDate(dateStr: string) {
@@ -89,16 +89,16 @@ export default function EventsPage() {
   }
 
   return (
-    <main className="flex flex-col min-h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col min-h-screen bg-[#faf8f4]">
       <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-white">
-        <span className="text-2xl font-bold tracking-tight text-[#003049]">mibibra</span>
+        <span className="text-2xl font-bold tracking-tight text-[#1a1a2e]">mi<span className="text-[#ff2d55]">bibra</span></span>
         <Link href="/dashboard" className="flex items-center gap-1.5 text-sm text-[#003049]/50 hover:text-[#003049] transition-colors font-medium">
           <ArrowLeft className="size-4" /> Dashboard
         </Link>
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#003049] to-[#D62828] px-6 py-10">
+      <div className="bg-gradient-to-r from-[#0d0d18] to-[#ff2d55] px-6 py-10">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white">
@@ -134,7 +134,7 @@ export default function EventsPage() {
                 : "Vuelve pronto, los organizadores están añadiendo eventos."}
             </p>
             {role === "organizer" && (
-              <Link href="/dashboard/events/new" className="px-5 py-2.5 bg-[#D62828] text-white rounded-full font-semibold text-sm hover:bg-[#b82020] transition-colors">
+              <Link href="/dashboard/events/new" className="px-5 py-2.5 bg-[#ff2d55] text-white rounded-full font-semibold text-sm hover:bg-[#e0002d] transition-colors">
                 Publicar evento →
               </Link>
             )}
@@ -222,7 +222,7 @@ export default function EventsPage() {
                           }
                           setRequesting(null)
                         }}
-                        className="w-full py-2.5 bg-[#D62828] hover:bg-[#b82020] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors mt-1"
+                        className="w-full py-2.5 bg-[#ff2d55] hover:bg-[#e0002d] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors mt-1"
                       >
                         {requesting === event.id ? "Enviando..." : "Solicitar este bolo →"}
                       </button>

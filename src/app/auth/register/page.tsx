@@ -95,7 +95,7 @@ function RegisterForm() {
           </p>
           <Link
             href="/auth/login"
-            className="w-full py-3 bg-[#D62828] hover:bg-[#b82020] rounded-full font-semibold text-sm text-white transition-colors text-center"
+            className="w-full py-3 bg-[#ff2d55] hover:bg-[#e0002d] rounded-full font-semibold text-sm text-white transition-colors text-center"
           >
             Ir al inicio de sesión
           </Link>
@@ -106,8 +106,8 @@ function RegisterForm() {
 
   const benefits = role === "dj" ? DJ_BENEFITS : role === "organizer" ? ORGANIZER_BENEFITS : DJ_BENEFITS
   const panelBg = role === "organizer"
-    ? "from-[#F77F00] to-[#FCBF49]"
-    : "from-[#003049] to-[#D62828]"
+    ? "from-[#F77F00] to-[#ffd60a]"
+    : "from-[#003049] to-[#ff2d55]"
   const panelTitle = role === "organizer"
     ? "Encuentra el DJ que tu evento merece"
     : "Consigue más bolos. Muestra tu talento."
@@ -137,12 +137,12 @@ function RegisterForm() {
                 onClick={() => setRole("dj")}
                 className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
                   role === "dj"
-                    ? "border-[#D62828] bg-[#D62828]/5 scale-[1.02]"
+                    ? "border-[#ff2d55] bg-[#ff2d55]/5 scale-[1.02]"
                     : "border-[#003049]/15 bg-white hover:border-[#003049]/30"
                 }`}
               >
                 <span className="text-2xl">🎧</span>
-                <span className={`text-sm font-semibold ${role === "dj" ? "text-[#D62828]" : "text-[#003049]"}`}>DJ</span>
+                <span className={`text-sm font-semibold ${role === "dj" ? "text-[#ff2d55]" : "text-[#003049]"}`}>DJ</span>
               </button>
               <button
                 type="button"
@@ -223,7 +223,7 @@ function RegisterForm() {
               </div>
 
               {error && (
-                <p className="text-sm text-[#D62828] bg-[#D62828]/5 border border-[#D62828]/20 rounded-xl px-3 py-2">
+                <p className="text-sm text-[#ff2d55] bg-[#ff2d55]/5 border border-[#ff2d55]/20 rounded-xl px-3 py-2">
                   {error}
                 </p>
               )}
@@ -231,7 +231,7 @@ function RegisterForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-[#D62828] hover:bg-[#b82020] disabled:opacity-50 disabled:cursor-not-allowed rounded-full font-semibold text-sm text-white transition-colors mt-1"
+                className="w-full py-3 bg-[#ff2d55] hover:bg-[#e0002d] disabled:opacity-50 disabled:cursor-not-allowed rounded-full font-semibold text-sm text-white transition-colors mt-1"
               >
                 {loading ? "Creando cuenta..." : "Crear cuenta gratis →"}
               </button>
@@ -240,7 +240,7 @@ function RegisterForm() {
 
           <p className="text-center text-sm text-[#003049]/50">
             ¿Ya tienes cuenta?{" "}
-            <Link href="/auth/login" className="text-[#D62828] hover:text-[#b82020] font-medium transition-colors">
+            <Link href="/auth/login" className="text-[#ff2d55] hover:text-[#e0002d] font-medium transition-colors">
               Inicia sesión
             </Link>
           </p>

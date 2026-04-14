@@ -10,19 +10,19 @@ const GENRES: { name: string; color: string; textColor?: string }[] = [
   { name: "House", color: "#003049", textColor: "white" },
   { name: "Techno", color: "#1a1a2e", textColor: "white" },
   { name: "Tech House", color: "#003049", textColor: "white" },
-  { name: "Deep House", color: "#0a4f7a", textColor: "white" },
+  { name: "Deep House", color: "#007aff", textColor: "white" },
   { name: "Electrónica", color: "#003049", textColor: "white" },
   { name: "Drum & Bass", color: "#1a1a2e", textColor: "white" },
-  { name: "Trance", color: "#0a4f7a", textColor: "white" },
+  { name: "Trance", color: "#007aff", textColor: "white" },
   { name: "Ambient", color: "#003049", textColor: "white" },
   { name: "Reggaeton", color: "#F77F00", textColor: "white" },
-  { name: "Hip Hop", color: "#D62828", textColor: "white" },
-  { name: "R&B", color: "#D62828", textColor: "white" },
+  { name: "Hip Hop", color: "#ff2d55", textColor: "white" },
+  { name: "R&B", color: "#ff2d55", textColor: "white" },
   { name: "Trap", color: "#F77F00", textColor: "white" },
-  { name: "Comercial", color: "#FCBF49", textColor: "#003049" },
+  { name: "Comercial", color: "#ffd60a", textColor: "#003049" },
   { name: "Latino", color: "#F77F00", textColor: "white" },
-  { name: "Flamenco", color: "#D62828", textColor: "white" },
-  { name: "Jazz", color: "#FCBF49", textColor: "#003049" },
+  { name: "Flamenco", color: "#ff2d55", textColor: "white" },
+  { name: "Jazz", color: "#ffd60a", textColor: "#003049" },
 ]
 
 type DJProfile = {
@@ -109,17 +109,17 @@ export default function DJProfilePage() {
   const labelClass = "text-sm font-medium text-[#003049]"
 
   return (
-    <main className="flex flex-col min-h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col min-h-screen bg-[#faf8f4]">
       {/* Navbar */}
       <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-white">
-        <span className="text-2xl font-bold tracking-tight text-[#003049]">mibibra</span>
+        <span className="text-2xl font-bold tracking-tight text-[#1a1a2e]">mi<span className="text-[#ff2d55]">bibra</span></span>
         <Link href="/dashboard" className="flex items-center gap-1.5 text-sm text-[#003049]/50 hover:text-[#003049] transition-colors font-medium">
           <ArrowLeft className="size-4" /> Dashboard
         </Link>
       </nav>
 
       {/* Header del perfil */}
-      <div className="bg-gradient-to-r from-[#003049] via-[#D62828] to-[#F77F00] px-6 py-10">
+      <div className="bg-gradient-to-r from-[#003049] via-[#ff2d55] to-[#F77F00] px-6 py-10">
         <div className="max-w-2xl mx-auto flex items-center gap-6">
           {/* Avatar */}
           <div className="w-20 h-20 rounded-2xl bg-white/20 flex items-center justify-center text-white text-2xl font-bold shrink-0 border-2 border-white/30">
@@ -135,7 +135,7 @@ export default function DJProfilePage() {
             {/* Stats */}
             <div className="flex gap-4 mt-2">
               <div className="flex items-center gap-1 text-white/80 text-sm">
-                <Star className="size-3.5 fill-[#FCBF49] text-[#FCBF49]" />
+                <Star className="size-3.5 fill-[#ffd60a] text-[#ffd60a]" />
                 <span>{profile.rating > 0 ? profile.rating.toFixed(1) : "Nuevo"}</span>
               </div>
               {(profile.price_min || profile.price_max) && (
@@ -168,7 +168,7 @@ export default function DJProfilePage() {
               onClick={() => setTab(t)}
               className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 tab === t
-                  ? "border-[#D62828] text-[#D62828]"
+                  ? "border-[#ff2d55] text-[#ff2d55]"
                   : "border-transparent text-[#003049]/40 hover:text-[#003049]"
               }`}
             >
@@ -255,7 +255,7 @@ export default function DJProfilePage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full py-3.5 bg-[#D62828] hover:bg-[#b82020] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-[#ff2d55] hover:bg-[#e0002d] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors flex items-center justify-center gap-2"
             >
               {saving ? "Guardando..." : saved ? "✓ Cambios guardados" : <><Save className="size-4" /> Guardar perfil</>}
             </button>
@@ -266,7 +266,7 @@ export default function DJProfilePage() {
             <p className="text-sm text-[#003049]/50 text-center">Así verán tu perfil los organizadores de eventos</p>
             <div className="bg-white rounded-2xl border-2 border-zinc-100 overflow-hidden shadow-sm">
               {/* Header de la tarjeta */}
-              <div className="bg-gradient-to-r from-[#003049] to-[#D62828] p-6 flex items-center gap-4">
+              <div className="bg-gradient-to-r from-[#003049] to-[#ff2d55] p-6 flex items-center gap-4">
                 <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center text-white text-xl font-bold border-2 border-white/30">
                   {getInitials(profile.name)}
                 </div>
@@ -279,9 +279,9 @@ export default function DJProfilePage() {
               <div className="p-6 flex flex-col gap-5">
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-3">
-                  <StatBox label="Valoración" value={profile.rating > 0 ? `${profile.rating.toFixed(1)} ★` : "Nuevo"} color="#FCBF49" />
+                  <StatBox label="Valoración" value={profile.rating > 0 ? `${profile.rating.toFixed(1)} ★` : "Nuevo"} color="#ffd60a" />
                   <StatBox label="Tarifa" value={profile.price_min && profile.price_max ? `${profile.price_min}–${profile.price_max}€` : "A consultar"} color="#F77F00" />
-                  <StatBox label="No-shows" value={profile.no_show_count === 0 ? "Ninguno ✓" : `${profile.no_show_count}`} color={profile.no_show_count === 0 ? "#22c55e" : "#D62828"} />
+                  <StatBox label="No-shows" value={profile.no_show_count === 0 ? "Ninguno ✓" : `${profile.no_show_count}`} color={profile.no_show_count === 0 ? "#22c55e" : "#ff2d55"} />
                 </div>
 
                 {/* Bio */}
@@ -327,7 +327,7 @@ export default function DJProfilePage() {
                   </div>
                 )}
 
-                <button className="w-full py-3 bg-[#D62828] text-white rounded-full font-semibold text-sm">
+                <button className="w-full py-3 bg-[#ff2d55] text-white rounded-full font-semibold text-sm">
                   Solicitar este DJ
                 </button>
               </div>

@@ -13,16 +13,16 @@ const EVENT_TYPES = [
 ]
 
 const EVENT_TYPE_COLORS: Record<string, { bg: string; text: string }> = {
-  "Boda": { bg: "#FCBF49", text: "#003049" },
+  "Boda": { bg: "#ffd60a", text: "#003049" },
   "Discoteca": { bg: "#003049", text: "white" },
-  "Evento corporativo": { bg: "#0a4f7a", text: "white" },
-  "Festival": { bg: "#D62828", text: "white" },
+  "Evento corporativo": { bg: "#007aff", text: "white" },
+  "Festival": { bg: "#ff2d55", text: "white" },
   "Cumpleaños": { bg: "#F77F00", text: "white" },
-  "Fiesta privada": { bg: "#FCBF49", text: "#003049" },
+  "Fiesta privada": { bg: "#ffd60a", text: "#003049" },
   "Bar / Restaurante": { bg: "#003049", text: "white" },
-  "Hotel": { bg: "#0a4f7a", text: "white" },
+  "Hotel": { bg: "#007aff", text: "white" },
   "Terraza": { bg: "#F77F00", text: "white" },
-  "Afterwork": { bg: "#D62828", text: "white" },
+  "Afterwork": { bg: "#ff2d55", text: "white" },
 }
 
 export default function NewEventPage() {
@@ -77,16 +77,16 @@ export default function NewEventPage() {
   const labelClass = "text-sm font-medium text-[#003049] flex items-center gap-1.5"
 
   return (
-    <main className="flex flex-col min-h-screen bg-[#f9f9f7]">
+    <main className="flex flex-col min-h-screen bg-[#faf8f4]">
       <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-white">
-        <span className="text-2xl font-bold tracking-tight text-[#003049]">mibibra</span>
+        <span className="text-2xl font-bold tracking-tight text-[#1a1a2e]">mi<span className="text-[#ff2d55]">bibra</span></span>
         <Link href="/dashboard" className="flex items-center gap-1.5 text-sm text-[#003049]/50 hover:text-[#003049] transition-colors font-medium">
           <ArrowLeft className="size-4" /> Dashboard
         </Link>
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#D62828] to-[#F77F00] px-6 py-10">
+      <div className="bg-gradient-to-r from-[#ff2d55] to-[#F77F00] px-6 py-10">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-2xl font-bold text-white">Publicar evento</h1>
           <p className="text-white/70 text-sm mt-1">Los DJs disponibles podrán ver tu evento y solicitar el bolo</p>
@@ -189,7 +189,7 @@ export default function NewEventPage() {
         </div>
 
         {error && (
-          <p className="text-sm text-[#D62828] bg-[#D62828]/5 border border-[#D62828]/20 rounded-xl px-4 py-3">
+          <p className="text-sm text-[#ff2d55] bg-[#ff2d55]/5 border border-[#ff2d55]/20 rounded-xl px-4 py-3">
             {error}
           </p>
         )}
@@ -197,7 +197,7 @@ export default function NewEventPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3.5 bg-[#D62828] hover:bg-[#b82020] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors"
+          className="w-full py-3.5 bg-[#ff2d55] hover:bg-[#e0002d] disabled:opacity-50 text-white rounded-full font-semibold text-sm transition-colors"
         >
           {loading ? "Publicando..." : "Publicar evento →"}
         </button>
