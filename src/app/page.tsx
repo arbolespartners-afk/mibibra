@@ -57,6 +57,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/50">
             <a href="#como-funciona" className="hover:text-white transition-colors">Cómo funciona</a>
             <a href="#djs" className="hover:text-white transition-colors">DJs</a>
+            <Link href="/studio" className="hover:text-[#ffd60a] transition-colors">Studio</Link>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/auth/login" className="px-4 py-2 text-sm font-medium text-white/50 hover:text-white transition-colors">
